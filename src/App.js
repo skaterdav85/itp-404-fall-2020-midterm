@@ -33,7 +33,7 @@ export default class App extends React.Component {
               <nav>
                 <ul className="nav flex-column">
                   <li className="nav-item">
-                    <NavLink to="/" className="nav-link">
+                    <NavLink to="/" exact={true} className="nav-link">
                       Library
                     </NavLink>
                   </li>
