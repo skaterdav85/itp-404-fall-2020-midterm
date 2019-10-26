@@ -1,5 +1,13 @@
 import React from "react";
 import { fetchPlaylists } from "./api";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink
+} from "react-router-dom";
+import HomePage from "./HomePage";
+import PlaylistPage from "./PlaylistPage";
 import "./App.css";
 
 export default class App extends React.Component {
@@ -15,7 +23,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <Router>
         <header className="ml-3 mt-3">
           <h1>My Music App</h1>
         </header>
@@ -24,7 +32,11 @@ export default class App extends React.Component {
             <div className="col-2">
               <nav>
                 <ul className="nav flex-column">
-                  <li className="nav-item">Library</li>
+                  <li className="nav-item">
+                    <NavLink to="/" className="nav-link">
+                      Library
+                    </NavLink>
+                  </li>
                 </ul>
               </nav>
               <hr />
@@ -32,16 +44,26 @@ export default class App extends React.Component {
                 {this.state.playlists.map(playlist => {
                   return (
                     <li key={playlist.id} className="nav-item">
-                      {playlist.attributes.name}
+                      <NavLink
+                        to={`/playlists/${playlist.id}/tracks`}
+                        className="nav-link"
+                      >
+                        {playlist.attributes.name}
+                      </NavLink>
                     </li>
                   );
                 })}
               </ul>
             </div>
-            <main className="col-10"></main>
+            <main className="col-10">
+              <Switch>
+                <Route exact={true} path="/" component={HomePage} />
+                <Route path="/playlists/:id/tracks" component={PlaylistPage} />
+              </Switch>
+            </main>
           </div>
         </div>
-      </div>
+      </Router>
     );
   }
 }
