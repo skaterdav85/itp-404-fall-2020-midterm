@@ -59,6 +59,9 @@ export default class App extends React.Component {
               <Switch>
                 <Route exact={true} path="/" component={HomePage} />
                 <Route path="/playlists/:id/tracks" component={PlaylistPage} />
+                <Route>
+                  <p>Page not found.</p>
+                </Route>
               </Switch>
             </main>
           </div>
