@@ -1,5 +1,11 @@
 import React from "react";
 
+function millisecondsToMinutes(milliseconds) {
+  const minutes = Math.floor(milliseconds / 1000 / 60);
+  const seconds = Math.floor((milliseconds / 1000) % 60);
+  return `${minutes} minutes and ${seconds} seconds`;
+}
+
 export default function TrackList(props) {
   return props.tracks.length ? (
     <table className="table table-dark">
@@ -11,10 +17,11 @@ export default function TrackList(props) {
       </thead>
       <tbody>
         {props.tracks.map(track => {
+          let duration = millisecondsToMinutes(track.attributes.milliseconds);
           return (
             <tr key={track.id}>
               <td>{track.attributes.name}</td>
-              <td>{track.attributes.milliseconds}</td>
+              <td>{duration}</td>
             </tr>
           );
         })}
