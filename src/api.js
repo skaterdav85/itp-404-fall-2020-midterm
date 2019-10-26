@@ -10,3 +10,8 @@ export async function getTracksByPage(page) {
   const response = await fetch(`${HOST}/api/tracks?page=${page}`);
   return response.json();
 }
+
+export async function fetchPlaylist(id) {
+  const response = await fetch(`${HOST}/api/playlists/${id}`);
+  return response.json();
+}
