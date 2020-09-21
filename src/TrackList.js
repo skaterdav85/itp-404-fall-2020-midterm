@@ -6,8 +6,8 @@ function millisecondsToMinutes(milliseconds) {
   return `${minutes} minutes and ${seconds} seconds`;
 }
 
-export default function TrackList(props) {
-  return props.tracks.length ? (
+export default function TrackList({ tracks }) {
+  return tracks.length ? (
     <table className="table table-dark">
       <thead>
         <tr>
@@ -16,8 +16,8 @@ export default function TrackList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.tracks.map(track => {
-          let duration = millisecondsToMinutes(track.attributes.milliseconds);
+        {tracks.map((track) => {
+          const duration = millisecondsToMinutes(track.attributes.milliseconds);
           return (
             <tr key={track.id}>
               <td>{track.attributes.name}</td>

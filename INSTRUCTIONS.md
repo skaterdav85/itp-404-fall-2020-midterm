@@ -1,15 +1,15 @@
-# Fall 2019 ITP 404 Midterm
+# Fall 2020 ITP 404 Midterm
 
 Rebuild the following music application with React and [React Router](https://reacttraining.com/react-router/web/guides/quick-start):
 
-https://itp404-2019-midterm.surge.sh
+https://itp404-2020-midterm.surge.sh/
 
 You are not allowed to use any other libraries.
 
 ## Setup
 
 1. Create a new React app with Create React App
-2. Install React Router
+2. Install [React Router](https://reactrouter.com/)
 3. Run `npm start`
 4. Start coding
 
@@ -24,10 +24,13 @@ If you'd like to see all the changes since the last commit, you can run `git dif
 You can style your app however you want, but it should have a similar layout as mine. I used Bootstrap. If you'd like to use Bootstrap, add the following stylesheet to `public/index.html` in between the `head` tags:
 
 ```html
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
 ```
 
-I also created a static HTML page on JSBin if you'd like to use that as a guide: https://jsbin.com/zurenuxuwo/edit?html,output. __DO NOT COPY THE CONTENTS OF THIS FILE AND PASTE IT IN `public/index.html`.__ You can also look at the Elements panel in Chrome Dev Tools on the sample application.
+I also created a static HTML page on JSBin if you'd like to use that as a guide: https://jsbin.com/zurenuxuwo/edit?html,output. **DO NOT COPY THE CONTENTS OF THIS FILE AND PASTE IT IN `public/index.html`.** You can also look at the Elements panel in Chrome Dev Tools on the sample application.
 
 ## Requirements
 
@@ -35,10 +38,7 @@ I also created a static HTML page on JSBin if you'd like to use that as a guide:
 
 The left navigation has 2 sections. The first section has 1 link for Library. This will link to the `/` route. Underneath that, there is a list of playlists loaded from https://chinook-api.herokuapp.com/api/playlists. Each playlist should link to a route `/playlists/:id/tracks` where `:id` is replaced with that playlist's `id`.
 
-Make sure that all links have a unique style when their route is active. In my application, I simply made active links have an underline. You will find the following resources helpful for making the Library link display the active state correctly:
-
-* [NavLink exact](https://reacttraining.com/react-router/web/api/NavLink/exact-bool)
-* [Route exact](https://reacttraining.com/react-router/web/api/Route/exact-bool)
+Make sure that all links have a unique style when their route is active. In my application, I simply made active links have an underline.
 
 ### The Library Page
 
@@ -48,8 +48,8 @@ Display the total number of pages found in the `meta.pages` property.
 
 Display the following track properties in a table:
 
-* `name`
-* `milliseconds` formatted as "X minutes and Y seconds". Hint, you will need to use `Math.floor` and the modulus operator. If you are not sure how to write a function that computes this, skip it for now and come back to it at the end.
+- `name`
+- `milliseconds` formatted as "X minutes and Y seconds". Hint: There are 1000 milliseconds in 1 second and 60 seconds in 1 minute. You will need to use `Math.floor` and the [modulus (remainder) operator](https://www.w3schools.com/js/js_arithmetic.asp). If you are not sure how to write a function that computes this, skip it for now, display `milliseconds` as is, and come back to it at the end.
 
 Next, build out the pagination feature so that users can jump to a specific page. If a user selects a page number that is out of range, display "No tracks found".
 
@@ -59,8 +59,8 @@ When a user clicks on a playlist in the left navigation, fetch and display track
 
 Display the following track properties in a table:
 
-* `name`
-* `milliseconds` formatted as "X minutes and Y seconds". Hint, you will need to use `Math.floor` and the modulus operator. If you are not sure how to write a function that computes this, skip it for now and come back to it at the end.
+- `name`
+- `milliseconds` formatted as "X minutes and Y seconds". Again, if you are not sure how to write a function that computes this, skip it for now, display `milliseconds` as is, and come back to it at the end.
 
 If a playlist doesn't have any tracks, display to the user "No tracks found". For example, Movies doesn't have any tracks: https://chinook-api.herokuapp.com/api/playlists/2. Notice how there isn't an `included` key.
 
@@ -68,29 +68,16 @@ Also display the name of the playlist above the table.
 
 Be sure that the list of tracks updates when changing between playlists.
 
+Lastly, if you manually change the playlist ID in the URL to something that doesn't exist such as 55555555, the `GET /api/playlists/:id` endpoint will return a 404. Please display an error message on the page when this happens like the following: https://itp404-2020-midterm.surge.sh/playlists/55555555/tracks.
+
 ### Loading States
 
 Whenever an AJAX call is pending, display a loading indicator. This includes:
 
-* Clicking on a playlist in the left navigation
-* Clicking on Library in the left navigation
-* Changing the page number on the Library page
+- Clicking on a playlist in the left navigation
+- Clicking on Library in the left navigation
+- Changing the page number on the Library page
 
 ### 404 Page
 
 If a user navigates to a route that doesn't exist, display "Page not found.".
-
-### Deploying
-
-```
-npm run build
-cd build
-mv index.html 200.html
-surge
-```
-
-Paste your Surge URL at the top of the README.md of your repo.
-
-### Submission
-
-Submit your repo to https://classroom.github.com/a/fj_0NO_U.
