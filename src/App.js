@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { fetchPlaylists } from "./api";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,16 +8,9 @@ import {
 import HomePage from "./components/HomePage";
 import PlaylistPage from "./components/PlaylistPage";
 import "./App.css";
+import PlaylistsNavigation from "./components/PlaylistsNavigation";
 
 export default function App() {
-  const [playlists, setPlaylists] = useState([]);
-
-  useEffect(() => {
-    fetchPlaylists().then((playlists) => {
-      setPlaylists(playlists);
-    });
-  }, []);
-
   return (
     <Router>
       <header className="ml-3 mt-3">
@@ -37,20 +29,7 @@ export default function App() {
               </ul>
             </nav>
             <hr />
-            <ul className="nav flex-column">
-              {playlists.map((playlist) => {
-                return (
-                  <li key={playlist.id} className="nav-item">
-                    <NavLink
-                      to={`/playlists/${playlist.id}/tracks`}
-                      className="nav-link"
-                    >
-                      {playlist.attributes.name}
-                    </NavLink>
-                  </li>
-                );
-              })}
-            </ul>
+            <PlaylistsNavigation />
           </div>
           <main className="col-10">
             <Switch>
